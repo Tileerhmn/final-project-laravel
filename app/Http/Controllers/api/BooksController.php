@@ -13,10 +13,20 @@ class BooksController extends Controller
 
     public function index()
     {
-        $books = Books::all();
+        $books = Books::with('categories', 'authors')->get();
+        foreach ($books as $book) {
+            $data[] = [
+                'isbn' => $book->isbn,
+                'title' => $book->title,
+                'image' => url($book->image),
+                'description' => $book->description,
+                'category' => $book->categories->name,
+                'author' => $book->authors->name
+            ];
+        }
         return response()->json([
             'status' => 'success',
-            'data' => $books
+            'data' => $data
         ]);
     }
 
@@ -117,9 +127,20 @@ class BooksController extends Controller
     public function show($id)
     {
         $book = Books::find($id);
+
+        $data = [
+            'isbn' => $book->isbn,
+            'title' => $book->title,
+            'image' => url($book->image),
+            'description' => $book->description,
+            'category' => $book->categories->name,
+            'author' => $book->authors->name,
+            'category_id' => $book->categories->id,
+            'author_id' => $book->authors->id
+        ];
         return response()->json([
             'status' => 'success',
-            'data' => $book
+            'data' => $data
         ]);
     }
 

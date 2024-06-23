@@ -42,7 +42,7 @@ class AuthorsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:authors,email'
+            'email' => 'required|email|'
         ]);
 
         $author = Authors::find($id);
@@ -63,6 +63,17 @@ class AuthorsController extends Controller
         $author = Authors::find($id);
         $author->delete();
 
+        return response()->json([
+            'status' => 'success',
+            'data' => $author
+        ]);
+    }
+
+    // show
+
+    public function show($id)
+    {
+        $author = Authors::find($id);
         return response()->json([
             'status' => 'success',
             'data' => $author

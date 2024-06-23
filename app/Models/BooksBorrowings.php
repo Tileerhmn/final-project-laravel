@@ -10,7 +10,7 @@ class BooksBorrowings extends Model
 {
     use HasFactory;
 
-    protected $table = 'books_borrowings';
+    protected $table = 'book_borrowings';
 
     protected $fillable = [
         'book_id',
@@ -19,7 +19,8 @@ class BooksBorrowings extends Model
         'returned_at',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
+    public $incrementing = true;
 
     // relation to books table
 

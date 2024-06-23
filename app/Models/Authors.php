@@ -18,7 +18,7 @@ class Authors extends Model
         'email',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
     public $incrementing = true;
 
     // relation to books table

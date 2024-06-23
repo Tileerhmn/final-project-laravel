@@ -10,23 +10,45 @@ class BookBorrowingsController extends Controller
 {
     public function index()
     {
-        $borrowings = BooksBorrowings::with(['book', 'user'])->get(); // Eager loading relasi book dan user
+        $borrowings = BooksBorrowings::with(['books', 'users'])->get();
+        $data = $borrowings->map(function ($borrowing) {
+            return [
+                'id' => $borrowing->id,
+                'book' => $borrowing->books->title,
+                'user' => $borrowing->users->username,
+                'borrowed_at' => $borrowing->borrowed_at,
+                'returned_at' => $borrowing->returned_at
+            ];
+        });
+
         return response()->json([
             'status' => 'success',
-            'data' => $borrowings
+            'data' => $data
         ]);
     }
 
+
     public function show($id)
     {
-        $borrowing = BooksBorrowings::with(['book', 'user'])->find($id); // Eager loading relasi book dan user
+        $borrowing = BooksBorrowings::with(['books', 'users'])->find($id); // Eager loading relasi book dan user
         if (!$borrowing) {
             return response()->json(['message' => 'Peminjaman tidak ditemukan'], 404);
         }
 
+        // data yang akan dikembalikan
+        $data = [
+            'id' => $borrowing->id,
+            'book' => $borrowing->books->title,
+            'isbn' => $borrowing->books->isbn,
+            "user_id" => $borrowing->users->id,
+            'user' => $borrowing->users->username,
+            'borrowed_at' => $borrowing->borrowed_at,
+            'returned_at' => $borrowing->returned_at
+        ];
+
         return response()->json([
             'status' => 'success',
-            'data' => $borrowing
+            'data' => $data
         ]);
     }
 
