@@ -25,10 +25,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/login', [AuthContoller::class, 'login']);
+Route::post('/register', [UserController::class, 'store']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // logout
     Route::post('/logout', [AuthContoller::class, 'logout']);
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'abilities:user']], function () {
+    Route::get('/book-user', [BooksController::class, 'index']);
+
+    // borrowings
+    Route::get('/borrowings-user', [BookBorrowingsController::class, 'showborrowbyuser']);
+    Route::get('/borrowings-user/return', [BookBorrowingsController::class, 'showreturnbyuser']);
+    ROute::post('/borrowings-user/return', [BookBorrowingsController::class, 'returnedbook']);
+    Route::post('/borrowings-user', [BookBorrowingsController::class, 'borrow']);
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:admin']], function () {
