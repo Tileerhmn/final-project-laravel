@@ -134,6 +134,14 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/users" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -191,9 +199,9 @@
     <!-- AdminLTE App -->
     <script src="{{asset('lte/dist/js/adminlte.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('lte/dist/js/demo.js')}}"></script>
+    <!-- <script src="{{asset('lte/dist/js/demo.js')}}"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{asset('lte/dist/js/pages/dashboard.js')}}"></script>
+    <!-- <script src="{{asset('lte/dist/js/pages/dashboard.js')}}"></script> -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowingsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,3 +55,10 @@ Route::get('/borrow/{id}/edit', [BorrowingsController::class, 'edit'])->name('bo
 Route::put('/borrow/{id}', [BorrowingsController::class, 'update'])->name('borrowings.update');
 Route::delete('/borrow/{id}', [BorrowingsController::class, 'destroy'])->name('borrowings.destroy');
 Route::put('/borrow/{id}/return', [BorrowingsController::class, 'returnbook'])->name('borrowings.return');
+
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/users/add', [UserController::class, 'create'])->name('user.create');
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');

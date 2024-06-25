@@ -30,13 +30,13 @@ class AuthContoller extends Authenticatable
             return response()->json([
                 'status' => 'success',
                 'token' => $token
-            ]);
+            ], 200);
         } else {
 
             return response()->json([
                 'status' => 'error',
                 'message' => 'Invalid credentials'
-            ]);
+            ], 401);
         }
     }
 

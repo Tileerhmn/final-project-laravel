@@ -16,10 +16,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100vw;
         }
 
         .login-container {
-            max-width: 400px;
+            width: 400px;
             padding: 20px;
             background-color: #fff;
             border-radius: 5px;
@@ -80,11 +81,13 @@
                         password: password
                     }),
                     success: function(response) {
-                        console.log(response, "success");
-                        localStorage.setItem('token', response.token);
-                        localStorage.setItem('abilities', "admin");
-                        // Redirect or handle success scenario
-                        window.location.href = '/book';
+                        if (username == "admin" && password == "admin") {
+                            localStorage.setItem('token', response.token);
+                            localStorage.setItem('abilities', "admin");
+                            window.location.href = '/book';
+                        } else {
+                            alert('Login failed: invalid credentials');
+                        }
                     },
                     error: function(response) {
                         console.log(response, "error");
@@ -102,7 +105,7 @@
             const abilities = localStorage.getItem('abilities');
 
             // Jika tidak ada token atau abilities, alihkan ke halaman login
-            if (token || abilities) {
+            if (token != 'undefined' && abilities === 'admin') {
                 window.location.href = '/book'; // Sesuaikan dengan route login Anda
             }
         });

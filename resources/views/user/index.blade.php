@@ -1,0 +1,55 @@
+@extends('layout.main')
+@section('content')
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1 class="m-0">User</h1>
+                </div><!-- /.col -->
+                <div>
+                    <a href="/users/add" class="bg-success btn">Tambah User</a>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data as $user) : ?> <tr>
+                            <td><?= $user->username ?></td>
+                            <td class="d-flex">
+                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                                <form class="px-2" action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus User ini?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+@endsection

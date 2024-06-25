@@ -30,6 +30,8 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
+
+                        <th scope="col">Cover Buku</th>
                         <th scope="col">Judul Buku</th>
                         <th scope="col">Nama Peminjam</th>
                         <th scope="col">Tanggal Pinjam</th>
@@ -39,6 +41,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($data as $borrow) : ?> <tr>
+                            <td><img src="<?= $borrow->books->image ?>" alt="" style="width: 100px"></td>
                             <td><?= $borrow->books->title ?></td>
                             <td><?= $borrow->users->username ?></td>
                             <td><?= $borrow->borrowed_at ?></td>
